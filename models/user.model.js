@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import {Schema, model} from "mongoose";
 import validator from "validator";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     email: {
         type: String,
         unique: true,
@@ -21,6 +21,4 @@ const UserSchema = new mongoose.Schema({
 	}
 });
 
-const User = mongoose.model('users', UserSchema);
-
-export default User;
+export default model('User', UserSchema);

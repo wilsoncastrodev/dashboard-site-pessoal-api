@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
+import Profile from "../models/profile.model.js";
 import { createToken } from "../utils/tokens.js"
 import { errorMessage, tokenMessage } from "../utils/messages.js"
 import { loginValidation, registerValidation } from "../validations/auth.validation.js";
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
     const { email, password } = req.body;
     const errors = loginValidation(req.body);
 
@@ -24,34 +25,39 @@ export const login = async (req, res) => {
         return res.status(401).send(errorMessage("email", "Endereço de e-mail ou senha incorretos"));
     }
 
-    let token = createToken({id: user._id});
+    const profile = await Profile.findOne({ user: user.id });
 
-    res.send(tokenMessage('Usuário Autenticado', user.email, token));
+    const token = createToken({id: user._id});
+
+    res.send(tokenMessage('Usuário Autenticado', {id: user._id, email: user.email, profile: profile}, token));
 }
 
-export const register = async (req, res) => {
-    const { email, password } = req.body;
+const register = async (req, res) => {
+    const { name, email, password } = req.body;
     const errors = registerValidation(req.body);
 
     if (errors) {
         return res.status(422).send(errors);
     }
 
+    const verifyUser = await User.findOne({email});
+
+    if (verifyUser) {
+        return res.status(400).send(errorMessage("email", "Usuário já cadastrado"));
+    }
+
     const hashPassword = await bcrypt.hash(password, 8);
 
-    User.create({
-        email,
-        password: hashPassword
-    }, (error, user) => {
-        if(error) {
-            if (error.code === 11000) {
-                return res.status(400).send(errorMessage("email", "Usuário já cadastrado"));
-            }
-        }
+    const user = await User.create({email, password: hashPassword});
 
-        let token = createToken({id: user._id});
+    const profile = await Profile.create({user: user._id, name});
 
-        res.send(tokenMessage('Usuário Registrado', user.email, token));
-    });
+    const token = createToken({id: user._id});
+
+    res.send(tokenMessage('Usuário Registrado', {id: user._id, email: user.email, profile: profile}, token));
 }
 
+export default {
+    login,
+    register
+}

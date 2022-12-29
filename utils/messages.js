@@ -4,12 +4,10 @@ export const errorMessage = (field, message) => {
     }
 };
 
-export const tokenMessage = (message, email, token) => {
+export const tokenMessage = (message, user, token) => {
     return {
         "message": message,
-        "user": {
-            "email": email
-        },
+        "user": user,
         "token": token
     }
 };

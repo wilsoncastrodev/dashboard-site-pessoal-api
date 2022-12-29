@@ -19,6 +19,11 @@ export const loginValidation = data => {
 
 export const registerValidation = data => {
     return dataValidation(data, {
+        name: Joi.string().required().messages({
+            'any.required': 'O Nome é obrigatório',
+            'string.empty': 'O Nome é obrigatório',
+            'string.base': 'O Nome é inválido',
+        }),
         email: Joi.string().required().email().messages({
             'any.required': 'O E-mail é obrigatório',
             'string.empty': 'O E-mail é obrigatório',

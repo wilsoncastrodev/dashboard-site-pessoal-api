@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const dataValidation = (data, schema) => {
-    schema = Joi.object().keys(schema).unknown(false);
+    schema = Joi.object().keys(schema).unknown(true);
 
     let { error } = schema.validate(data, { abortEarly: false });
 
