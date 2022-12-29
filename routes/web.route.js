@@ -8,5 +8,6 @@ router.post("/login", AuthController.login);
 router.post("/register", AuthController.register);
 
 router.get("/profiles/:id", ProfileController.getProfileById);
+router.patch("/profiles/:id", ProfileController.updateProfile);
 
 export default router;
