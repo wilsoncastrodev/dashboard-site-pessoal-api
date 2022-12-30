@@ -16,13 +16,13 @@ const login = async (req, res) => {
     const user = await User.findOne({email});
 
     if(!user) {
-        return res.status(401).send(errorMessage("email", "Endereço de e-mail ou senha incorretos"));
+        return res.status(401).send(errorMessage("message", "Endereço de e-mail ou senha incorretos"));
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
-        return res.status(401).send(errorMessage("email", "Endereço de e-mail ou senha incorretos"));
+        return res.status(401).send(errorMessage("message", "Endereço de e-mail ou senha incorretos"));
     }
 
     const profile = await Profile.findOne({ user: user.id });
