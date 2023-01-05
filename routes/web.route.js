@@ -27,4 +27,10 @@ router.post('/experiences', auth, ExperienceController.createExperience);
 router.patch('/experiences/:id', auth, ExperienceController.updateExperience);
 router.delete('/experiences/:id', auth, ExperienceController.deleteExperience);
 
+router.get("/interests", auth, InterestController.getAllInterest);
+router.get("/interests/:id", auth, InterestController.getInterestById);
+router.post("/interests/", uploadImage('interests', 'content'), auth, InterestController.createInterest);
+router.patch('/interests/:id', uploadImage('interests', 'content'), auth, InterestController.updateInterest);
+router.delete('/interests/:id', auth, InterestController.deleteInterest);
+
 export default router;

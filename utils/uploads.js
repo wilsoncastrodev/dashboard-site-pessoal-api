@@ -3,7 +3,7 @@ import path, { resolve } from 'path';
 import slugify from "slugify";
 import fs from 'fs';
 
-export const uploadFile = (directory, field) => {
+export const uploadFile = (directory, field = "file") => {
     const dir = resolve('public/uploads/files', directory);
 
     if (!fs.existsSync(dir)){
@@ -24,7 +24,7 @@ export const uploadFile = (directory, field) => {
     return upload.single('cv');
 }
 
-export const uploadImage = (directory, field) => {
+export const uploadImage = (directory, field = "name") => {
     const dir = resolve('public/uploads/images', directory);
 
     if (!fs.existsSync(dir)){
