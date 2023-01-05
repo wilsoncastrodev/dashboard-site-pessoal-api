@@ -6,6 +6,7 @@ import ProfileController from "../controllers/profile.controller.js";
 import EducationController from "../controllers/education.controller.js";
 import ExperienceController from "../controllers/experience.controller.js";
 import InterestController from "../controllers/interest.controller.js";
+import SourcesKnowledgeController from "../controllers/sourcesKnowledge.controller.js";
 
 const router = express.Router();
 
@@ -32,5 +33,11 @@ router.get("/interests/:id", auth, InterestController.getInterestById);
 router.post("/interests/", uploadImage('interests', 'content'), auth, InterestController.createInterest);
 router.patch('/interests/:id', uploadImage('interests', 'content'), auth, InterestController.updateInterest);
 router.delete('/interests/:id', auth, InterestController.deleteInterest);
+
+router.get("/sources-knowledge", auth, SourcesKnowledgeController.getAllSourcesKnowledge);
+router.get("/sources-knowledge/:id", auth, SourcesKnowledgeController.getSourcesKnowledgeById);
+router.post("/sources-knowledge/", uploadImage('sources-knowledge', 'name'), auth, SourcesKnowledgeController.createSourcesKnowledge);
+router.patch('/sources-knowledge/:id', uploadImage('sources-knowledge', 'name'), auth, SourcesKnowledgeController.updateSourcesKnowledge);
+router.delete('/sources-knowledge/:id', auth, SourcesKnowledgeController.deleteSourcesKnowledge);
 
 export default router;
