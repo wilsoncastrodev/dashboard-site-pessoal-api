@@ -1,7 +1,7 @@
 import { verifyToken } from "../utils/tokens.js"
 import User from "../models/user.model.js";
 
-export const auth = async (req, res, next) => {
+const auth = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!(authorization && authorization.startsWith('Bearer'))) {
@@ -15,6 +15,10 @@ export const auth = async (req, res, next) => {
     }
 
     const decoded = await verifyToken(token);
+
+    if (!decoded) {
+        return res.status(401).send({ message: "Token expirado" });
+    }
 
     const user = await User.findById(decoded.data.id).select("-password");
 

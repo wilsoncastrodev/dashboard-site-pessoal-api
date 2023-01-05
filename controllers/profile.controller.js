@@ -13,6 +13,8 @@ const getProfileById = async (req, res) => {
 };
 
 const updateProfile = async (req, res) => {
+    req.body.cv = req.file;
+
     const errors = updateProfileValidation(req.body);
 
     if (errors) {
@@ -21,7 +23,7 @@ const updateProfile = async (req, res) => {
 
     const profile = await Profile.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
 
-    res.status(200).send({
+    return res.status(200).send({
         message: "Perfil atualizado com sucesso",
         profile
     });

@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import { Schema, model } from "mongoose";
 
 const ProfileSchema = new Schema({
     user: {
@@ -17,7 +17,8 @@ const ProfileSchema = new Schema({
         trim: true
     },
     aboutMe: {
-        type: String
+        type: String,
+        trim: true
     },
     characteristic: {
         type: [String],
@@ -25,14 +26,14 @@ const ProfileSchema = new Schema({
     },
     education: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'Education',
+            type: Schema.Types.ObjectId,
+            ref: 'Education',
         },
     ],
     experiences: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'Experience',
+            type: Schema.Types.ObjectId,
+            ref: 'Experience',
         },
     ],
     interests: [
@@ -41,27 +42,39 @@ const ProfileSchema = new Schema({
             ref: 'Interest'
         }
     ],
-    skills: [
+    sourcesKnowledge: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'Skill',
+            type: Schema.Types.ObjectId,
+            ref: 'SourcesKnowledge',
         },
     ],
-    complementaryKnowledge: [
+    skills: [
         {
-          type: Schema.Types.ObjectId,
-          ref: 'ComplementaryKnowledge',
+            type: Schema.Types.ObjectId,
+            ref: 'Skill',
+        },
+    ],
+    knowledge: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Knowledge',
+        },
+    ],
+    messages: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Message',
         },
     ],
     contacts: {
         website: {
-            type: String
+            type: String,
         },
         phone: {
-            type: String
+            type: String,
         },
         location: {
-            type: String
+            type: String,
         }
     },
     social: {
@@ -72,6 +85,9 @@ const ProfileSchema = new Schema({
             type: String,
         },
     },
+    cv: {
+        type: Object,
+    }
 }, {
     timestamps: {
         createdAt: 'created_at',

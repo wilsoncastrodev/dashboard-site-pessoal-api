@@ -45,3 +45,36 @@ export const passwordValidation = (value, helpers) => {
 
     return value;
 };
+
+export const sizeImageValidation = (value, helpers) => {
+    if (value >= 1000000) {
+        return helpers.message('O tamanho da imagem deve ser menor do que 1mb');
+    }
+
+    return value;
+};
+
+export const mimeImageValidation = (value, helpers) => {
+    if (value !== 'image/jpeg' && value !== 'image/jpg' && value !== 'image/png' && value !== 'image/svg+xml') {
+        return helpers.message('Formato de imagem inválido. Você só pode fazer upload do arquivo JPG, JPEG, PNG ou SVG');
+    }
+
+    return value;
+};
+
+export const sizeFileValidation = (value, helpers) => {
+    if (value >= 1000000) {
+        return helpers.message('O tamanho da imagem deve ser menor do que 1mb');
+    }
+
+    return value;
+};
+
+export const mimeFileValidation = (value, helpers) => {
+    if (value !== 'application/pdf') {
+        return helpers.message('Formato de aquivo inválido. Você só pode fazer upload do arquivo em PDF');
+    }
+
+    return value;
+};
+

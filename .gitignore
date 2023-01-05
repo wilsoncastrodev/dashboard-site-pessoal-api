@@ -3,3 +3,5 @@ node_modules
 logger/
 
 .env.local
+
+public/uploads/

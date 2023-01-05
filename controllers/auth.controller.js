@@ -29,7 +29,7 @@ const login = async (req, res) => {
 
     const token = createToken({id: user._id});
 
-    res.send(tokenMessage('Usuário Autenticado', {id: user._id, email: user.email, profile: profile}, token));
+    return res.send(tokenMessage('Usuário Autenticado', {id: user._id, email: user.email, profile: profile}, token));
 }
 
 const register = async (req, res) => {
@@ -54,7 +54,7 @@ const register = async (req, res) => {
 
     const token = createToken({id: user._id});
 
-    res.send(tokenMessage('Usuário Registrado', {id: user._id, email: user.email, profile: profile}, token));
+    return res.send(tokenMessage('Usuário Registrado', {id: user._id, email: user.email, profile: profile}, token));
 }
 
 export default {
