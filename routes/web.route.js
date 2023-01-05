@@ -4,6 +4,7 @@ import auth from "../middlewares/auth.middleware.js"
 import AuthController from "../controllers/auth.controller.js";
 import ProfileController from "../controllers/profile.controller.js";
 import EducationController from "../controllers/education.controller.js";
+import ExperienceController from "../controllers/experience.controller.js";
 import InterestController from "../controllers/interest.controller.js";
 
 const router = express.Router();
@@ -19,5 +20,11 @@ router.get("/educations/:id", auth, EducationController.getEducationById);
 router.post('/educations', auth, EducationController.createEducation);
 router.patch('/educations/:id', auth, EducationController.updateEducation);
 router.delete('/educations/:id', auth, EducationController.deleteEducation);
+
+router.get("/experiences", auth, ExperienceController.getAllExperience);
+router.get("/experiences/:id", auth, ExperienceController.getExperienceById);
+router.post('/experiences', auth, ExperienceController.createExperience);
+router.patch('/experiences/:id', auth, ExperienceController.updateExperience);
+router.delete('/experiences/:id', auth, ExperienceController.deleteExperience);
 
 export default router;
