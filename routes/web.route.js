@@ -11,6 +11,7 @@ import CategorySkillController from "../controllers/categorySkill.controller.js"
 import SkillController from "../controllers/skill.controller.js";
 import CategoryKnowledgeController from "../controllers/categoryKnowledge.controller.js";
 import KnowledgeController from "../controllers/knowledge.controller.js";
+import MessageController from "../controllers/message.controller.js";
 
 const router = express.Router();
 
@@ -67,5 +68,10 @@ router.get("/knowledge/:id", auth, KnowledgeController.getKnowledgeById);
 router.post("/knowledge/", auth, KnowledgeController.createKnowledge);
 router.patch('/knowledge/:id', auth, KnowledgeController.updateKnowledge);
 router.delete('/knowledge/:id', auth, KnowledgeController.deleteKnowledge);
+
+router.get("/messages", auth, MessageController.getAllMessage);
+router.get("/messages/:id", auth, MessageController.getMessageById);
+router.post("/messages/", auth, MessageController.createMessage);
+router.delete('/messages/:id', auth, MessageController.deleteMessage);
 
 export default router;

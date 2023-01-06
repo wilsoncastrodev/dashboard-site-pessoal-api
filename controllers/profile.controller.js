@@ -3,7 +3,13 @@ import Profile from "../models/profile.model.js";
 import { updateProfileValidation } from "../validations/profile.validation.js";
 
 const getProfileById = async (req, res) => {
-    let profile = await Profile.findById(req.params.id).populate('interests');
+    let profile = await Profile.findById(req.params.id)
+        .populate({ path: 'education' })
+        .populate({ path: 'experiences' })
+        .populate({ path: 'interests' })
+        .populate({ path: 'sourcesKnowledge' })
+        .populate({ path: 'skills', populate: { path: 'categorySkill' } })
+        .populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' } });
 
     if (!profile) {
         return res.status(404).send({ message: "Perfil não encontrado" });
