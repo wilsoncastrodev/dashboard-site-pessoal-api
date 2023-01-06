@@ -8,6 +8,7 @@ import ExperienceController from "../controllers/experience.controller.js";
 import InterestController from "../controllers/interest.controller.js";
 import SourcesKnowledgeController from "../controllers/sourcesKnowledge.controller.js";
 import CategorySkillController from "../controllers/categorySkill.controller.js";
+import SkillController from "../controllers/skill.controller.js";
 
 const router = express.Router();
 
@@ -46,5 +47,11 @@ router.get("/category-skills/:id", auth, CategorySkillController.getCategorySkil
 router.post("/category-skills/", auth, CategorySkillController.createCategorySkill);
 router.patch('/category-skills/:id', auth, CategorySkillController.updateCategorySkill);
 router.delete('/category-skills/:id', auth, CategorySkillController.deleteCategorySkill);
+
+router.get("/skills", auth, SkillController.getAllSkill);
+router.get("/skills/:id", auth, SkillController.getSkillById);
+router.post("/skills/", auth, SkillController.createSkill);
+router.patch('/skills/:id', auth, SkillController.updateSkill);
+router.delete('/skills/:id', auth, SkillController.deleteSkill);
 
 export default router;
