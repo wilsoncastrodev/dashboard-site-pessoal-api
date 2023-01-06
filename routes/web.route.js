@@ -10,6 +10,7 @@ import SourcesKnowledgeController from "../controllers/sourcesKnowledge.controll
 import CategorySkillController from "../controllers/categorySkill.controller.js";
 import SkillController from "../controllers/skill.controller.js";
 import CategoryKnowledgeController from "../controllers/categoryKnowledge.controller.js";
+import KnowledgeController from "../controllers/knowledge.controller.js";
 
 const router = express.Router();
 
@@ -60,5 +61,11 @@ router.get("/category-knowledge/:id", auth, CategoryKnowledgeController.getCateg
 router.post("/category-knowledge/", auth, CategoryKnowledgeController.createCategoryKnowledge);
 router.patch('/category-knowledge/:id', auth, CategoryKnowledgeController.updateCategoryKnowledge);
 router.delete('/category-knowledge/:id', auth, CategoryKnowledgeController.deleteCategoryKnowledge);
+
+router.get("/knowledge", auth, KnowledgeController.getAllKnowledge);
+router.get("/knowledge/:id", auth, KnowledgeController.getKnowledgeById);
+router.post("/knowledge/", auth, KnowledgeController.createKnowledge);
+router.patch('/knowledge/:id', auth, KnowledgeController.updateKnowledge);
+router.delete('/knowledge/:id', auth, KnowledgeController.deleteKnowledge);
 
 export default router;
