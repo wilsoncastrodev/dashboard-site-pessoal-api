@@ -7,7 +7,7 @@ export const uploadFile = (directory, field = "file") => {
     const dir = resolve('public/uploads/files', directory);
 
     if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
+        fs.mkdirSync(dir, {recursive: true});
     }
 
     const storage = multer.diskStorage({
@@ -28,7 +28,7 @@ export const uploadImage = (directory, field = "name") => {
     const dir = resolve('public/uploads/images', directory);
 
     if (!fs.existsSync(dir)){
-        fs.mkdirSync(dir);
+        fs.mkdirSync(dir, {recursive: true});
     }
 
     const storage = multer.diskStorage({

@@ -5,3 +5,5 @@ logger/
 .env.local
 
 public/uploads/
+
+.env.prod
