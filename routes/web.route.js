@@ -76,6 +76,7 @@ router.patch('/knowledge/:id', auth, KnowledgeController.updateKnowledge);
 router.delete('/knowledge/:id', auth, KnowledgeController.deleteKnowledge);
 
 router.get("/messages", auth, MessageController.getAllMessage);
+router.get("/messages/:profileId", auth, MessageController.getAllProfileMessages);
 router.get("/messages/:id", auth, MessageController.getMessageById);
 router.post("/messages/", auth, MessageController.createMessage);
 router.delete('/messages/:id', auth, MessageController.deleteMessage);

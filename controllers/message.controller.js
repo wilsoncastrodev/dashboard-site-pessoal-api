@@ -3,13 +3,24 @@ import Profile from "../models/profile.model.js";
 import { messageValidation } from "../validations/message.validation.js";
 
 const getAllMessage = async (req, res) => {
-    let message = await Message.find();
+    let messages = await Message.find();
 
-    if (!message.length) {
+    if (!messages.length) {
         return res.status(404).send({ message: "Não há nenhuma Mensagem cadastrada." });
     }
 
-    return res.status(200).send(message);
+    return res.status(200).send(messages);
+};
+
+const getAllProfileMessages = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'messages' });
+    const messages = profile.messages;
+
+    if (!messages.length) {
+        return res.status(404).send({ message: "Não há nenhuma Mensagem cadastrada." });
+    }
+
+    return res.status(200).send(messages);
 };
 
 const getMessageById = async (req, res) => {
@@ -55,6 +66,7 @@ const deleteMessage = async (req, res) => {
 
 export default {
     getAllMessage,
+    getAllProfileMessages,
     getMessageById,
     createMessage,
     deleteMessage
