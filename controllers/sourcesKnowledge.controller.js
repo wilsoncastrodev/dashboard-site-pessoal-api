@@ -14,6 +14,17 @@ const getAllSourcesKnowledge = async (req, res) => {
     return res.status(200).send(sourcesKnowledge);
 };
 
+const getAllProfileSourcesKnowledge = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'sourcesKnowledge' });
+    const sourcesKnowledge = profile.sourcesKnowledge;
+
+    if (!sourcesKnowledge.length) {
+        return res.status(404).send({ message: "Não há nenhuma Fonte de Conhecimento cadastrada." });
+    }
+
+    return res.status(200).send(sourcesKnowledge);
+};
+
 const getSourcesKnowledgeById = async (req, res) => {
     let sourcesKnowledge = await SourcesKnowledge.findById(req.params.id);
 
@@ -86,6 +97,7 @@ const deleteSourcesKnowledge = async (req, res) => {
 
 export default {
     getAllSourcesKnowledge,
+    getAllProfileSourcesKnowledge,
     getSourcesKnowledgeById,
     createSourcesKnowledge,
     updateSourcesKnowledge,

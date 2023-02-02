@@ -43,6 +43,7 @@ router.patch('/interests/:id', uploadImage('interests', 'content'), auth, Intere
 router.delete('/interests/:id', auth, InterestController.deleteInterest);
 
 router.get("/sources-knowledge", auth, SourcesKnowledgeController.getAllSourcesKnowledge);
+router.get("/sources-knowledge/:profileId", auth, SourcesKnowledgeController.getAllProfileSourcesKnowledge);
 router.get("/sources-knowledge/:id", auth, SourcesKnowledgeController.getSourcesKnowledgeById);
 router.post("/sources-knowledge/", uploadImage('sources-knowledge', 'name'), auth, SourcesKnowledgeController.createSourcesKnowledge);
 router.patch('/sources-knowledge/:id', uploadImage('sources-knowledge', 'name'), auth, SourcesKnowledgeController.updateSourcesKnowledge);
