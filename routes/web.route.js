@@ -22,6 +22,7 @@ router.get("/profiles/:id", auth, ProfileController.getProfileById);
 router.patch("/profiles/:id", uploadFile('profile', 'name'), auth, ProfileController.updateProfile);
 
 router.get("/educations", auth, EducationController.getAllEducation);
+router.get("/educations/:profileId", auth, EducationController.getAllProfileEducation);
 router.get("/educations/:id", auth, EducationController.getEducationById);
 router.post('/educations', auth, EducationController.createEducation);
 router.patch('/educations/:id', auth, EducationController.updateEducation);

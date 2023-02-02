@@ -35,10 +35,6 @@ export const limitValitation = (limit) => {
 }
 
 export const passwordValidation = (value, helpers) => {
-    if (value.length < 8) {
-        return helpers.message('A Senha deve conter pelo menos 8 caracteres');
-    }
-
     if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
         return helpers.message('A Senha deve conter pelo menos uma letra e um número');
     }

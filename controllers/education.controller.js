@@ -13,6 +13,17 @@ const getAllEducation = async (req, res) => {
     return res.status(200).send(education);
 };
 
+const getAllProfileEducation = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'education' });
+    const education = profile.education;
+
+    if (!education.length) {
+        return res.status(404).send({ message: "Não há nenhuma Educação cadastrada." });
+    }
+
+    return res.status(200).send(education);
+};
+
 const getEducationById = async (req, res) => {
     let education = await Education.findById(req.params.id);
 
@@ -65,6 +76,7 @@ const deleteEducation = async (req, res) => {
 
 export default {
     getAllEducation,
+    getAllProfileEducation,
     getEducationById,
     createEducation,
     updateEducation,
