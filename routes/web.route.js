@@ -29,6 +29,7 @@ router.patch('/educations/:id', auth, EducationController.updateEducation);
 router.delete('/educations/:id', auth, EducationController.deleteEducation);
 
 router.get("/experiences", auth, ExperienceController.getAllExperience);
+router.get("/experiences/:profileId", auth, ExperienceController.getAllProfileExperiences);
 router.get("/experiences/:id", auth, ExperienceController.getExperienceById);
 router.post('/experiences', auth, ExperienceController.createExperience);
 router.patch('/experiences/:id', auth, ExperienceController.updateExperience);

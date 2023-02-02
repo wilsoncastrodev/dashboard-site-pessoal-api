@@ -4,13 +4,24 @@ import Profile from "../models/profile.model.js";
 import { experienceValidation } from "../validations/experience.validation.js";
 
 const getAllExperience = async (req, res) => {
-    let experience = await Experience.find();
+    let experiences = await Experience.find();
 
-    if (!experience.length) {
+    if (!experiences.length) {
         return res.status(404).send({ message: "Não há nenhuma Experiência cadastrada." });
     }
 
-    return res.status(200).send(experience);
+    return res.status(200).send(experiences);
+};
+
+const getAllProfileExperiences = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'experiences' });
+    const experiences = profile.experiences;
+
+    if (!experiences.length) {
+        return res.status(404).send({ message: "Não há nenhuma Experiência cadastrada." });
+    }
+
+    return res.status(200).send(experiences);
 };
 
 const getExperienceById = async (req, res) => {
@@ -65,6 +76,7 @@ const deleteExperience = async (req, res) => {
 
 export default {
     getAllExperience,
+    getAllProfileExperiences,
     getExperienceById,
     createExperience,
     updateExperience,

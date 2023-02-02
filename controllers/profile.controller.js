@@ -9,7 +9,8 @@ const getProfileById = async (req, res) => {
         .populate({ path: 'interests' })
         .populate({ path: 'sourcesKnowledge' })
         .populate({ path: 'skills', populate: { path: 'categorySkill' } })
-        .populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' } });
+        .populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' } })
+        .populate({ path: 'messages'});
 
     if (!profile) {
         return res.status(404).send({ message: "Perfil não encontrado" });
