@@ -69,6 +69,7 @@ router.patch('/category-knowledge/:id', auth, CategoryKnowledgeController.update
 router.delete('/category-knowledge/:id', auth, CategoryKnowledgeController.deleteCategoryKnowledge);
 
 router.get("/knowledge", auth, KnowledgeController.getAllKnowledge);
+router.get("/knowledge/:profileId", auth, KnowledgeController.getAllProfileKnowledge);
 router.get("/knowledge/:id", auth, KnowledgeController.getKnowledgeById);
 router.post("/knowledge/", auth, KnowledgeController.createKnowledge);
 router.patch('/knowledge/:id', auth, KnowledgeController.updateKnowledge);

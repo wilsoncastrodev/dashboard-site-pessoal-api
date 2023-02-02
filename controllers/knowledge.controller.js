@@ -13,6 +13,17 @@ const getAllKnowledge = async (req, res) => {
     return res.status(200).send(knowledge);
 };
 
+const getAllProfileKnowledge = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge' });
+    const knowledge = profile.knowledge;
+
+    if (!knowledge.length) {
+        return res.status(404).send({ message: "Não há nenhum Conhecimento cadastrado." });
+    }
+
+    return res.status(200).send(knowledge);
+};
+
 const getKnowledgeById = async (req, res) => {
     let knowledge = await Knowledge.findById(req.params.id);
 
@@ -77,6 +88,7 @@ const deleteKnowledge = async (req, res) => {
 
 export default {
     getAllKnowledge,
+    getAllProfileKnowledge,
     getKnowledgeById,
     createKnowledge,
     updateKnowledge,
