@@ -4,13 +4,24 @@ import Profile from "../models/profile.model.js";
 import { skillValidation } from "../validations/skill.validation.js";
 
 const getAllSkill = async (req, res) => {
-    let skill = await Skill.find().populate('categorySkill');
+    let skills = await Skill.find().populate('categorySkill');
 
-    if (!skill.length) {
+    if (!skills.length) {
         return res.status(404).send({ message: "Não há nenhuma Habilidade cadastrada." });
     }
 
-    return res.status(200).send(skill);
+    return res.status(200).send(skills);
+};
+
+const getAllProfileSkills = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills' });
+    const skills = profile.skills;
+
+    if (!skills.length) {
+        return res.status(404).send({ message: "Não há nenhuma Habilidade cadastrada." });
+    }
+
+    return res.status(200).send(skills);
 };
 
 const getSkillById = async (req, res) => {
@@ -77,6 +88,7 @@ const deleteSkill = async (req, res) => {
 
 export default {
     getAllSkill,
+    getAllProfileSkills,
     getSkillById,
     createSkill,
     updateSkill,

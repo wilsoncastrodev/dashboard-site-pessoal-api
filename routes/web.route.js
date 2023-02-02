@@ -56,6 +56,7 @@ router.patch('/category-skills/:id', auth, CategorySkillController.updateCategor
 router.delete('/category-skills/:id', auth, CategorySkillController.deleteCategorySkill);
 
 router.get("/skills", auth, SkillController.getAllSkill);
+router.get("/skills/:profileId", auth, SkillController.getAllProfileSkills);
 router.get("/skills/:id", auth, SkillController.getSkillById);
 router.post("/skills/", auth, SkillController.createSkill);
 router.patch('/skills/:id', auth, SkillController.updateSkill);
