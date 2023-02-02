@@ -14,6 +14,17 @@ const getAllInterest = async (req, res) => {
     return res.status(200).send(interest);
 };
 
+const getAllProfileInterests = async (req, res) => {
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'interests' });
+    const interests = profile.interests;
+
+    if (!interests.length) {
+        return res.status(404).send({ message: "Não há nenhum Interesse cadastrado." });
+    }
+
+    return res.status(200).send(interests);
+};
+
 const getInterestById = async (req, res) => {
     let interest = await Interest.findById(req.params.id);
 
@@ -86,6 +97,7 @@ const deleteInterest = async (req, res) => {
 
 export default {
     getAllInterest,
+    getAllProfileInterests,
     getInterestById,
     createInterest,
     updateInterest,
