@@ -17,6 +17,7 @@ const router = express.Router();
 
 router.post("/login", AuthController.login);
 router.post("/register", AuthController.register);
+router.delete("/logout", AuthController.logout);
 
 router.get("/profiles/:id", auth, ProfileController.getProfileById);
 router.patch("/profiles/:id", uploadFile('profile', 'name'), auth, ProfileController.updateProfile);
