@@ -34,7 +34,7 @@ export const educationValidation = data => {
             'string.empty': 'O campo Descrição é obrigatório',
             'string.base': 'O campo Descrição é inválido',
         }),
-        status: Joi.string().required().messages({
+        status: Joi.string().required().valid('Superior Completo', 'Superior Incompleto').messages({
             'any.required': 'O campo Status é obrigatório',
             'string.empty': 'O campo Status é obrigatório',
             'string.base': 'O campo Status é inválido',
