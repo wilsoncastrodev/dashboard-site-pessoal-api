@@ -4,7 +4,7 @@ import Profile from "../models/profile.model.js";
 import { knowledgeValidation } from "../validations/knowledge.validation.js";
 
 const getAllKnowledge = async (req, res) => {
-    let knowledge = await Knowledge.find().populate('categoryKnowledge');
+    let knowledge = await Knowledge.find().populate('categoryKnowledge').sort({"created_at": -1});
 
     if (!knowledge.length) {
         return res.status(404).send({ message: "Não há nenhum Conhecimento cadastrado." });
@@ -14,7 +14,7 @@ const getAllKnowledge = async (req, res) => {
 };
 
 const getAllProfileKnowledge = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge', options: { sort: { 'created_at': -1 } } });
     const knowledge = profile.knowledge;
 
     if (!knowledge.length) {

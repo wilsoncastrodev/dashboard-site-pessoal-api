@@ -4,7 +4,7 @@ import Profile from "../models/profile.model.js";
 import { skillValidation } from "../validations/skill.validation.js";
 
 const getAllSkill = async (req, res) => {
-    let skills = await Skill.find().populate('categorySkill');
+    let skills = await Skill.find().populate('categorySkill').sort({"created_at": -1});
 
     if (!skills.length) {
         return res.status(404).send({ message: "Não há nenhuma Habilidade cadastrada." });
@@ -14,7 +14,7 @@ const getAllSkill = async (req, res) => {
 };
 
 const getAllProfileSkills = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills', options: { sort: { 'created_at': -1 } } });
     const skills = profile.skills;
 
     if (!skills.length) {

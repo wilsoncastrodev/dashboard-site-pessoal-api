@@ -3,7 +3,7 @@ import Profile from "../models/profile.model.js";
 import { messageValidation } from "../validations/message.validation.js";
 
 const getAllMessage = async (req, res) => {
-    let messages = await Message.find();
+    let messages = await Message.find().sort({"created_at": -1});
 
     if (!messages.length) {
         return res.status(404).send({ message: "Não há nenhuma Mensagem cadastrada." });
@@ -13,7 +13,7 @@ const getAllMessage = async (req, res) => {
 };
 
 const getAllProfileMessages = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'messages' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'messages', options: { sort: { 'created_at': -1 } } });
     const messages = profile.messages;
 
     if (!messages.length) {

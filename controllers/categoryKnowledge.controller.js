@@ -3,7 +3,7 @@ import CategoryKnowledge from "../models/categoryKnowledge.model.js";
 import { categoryKnowledgeValidation } from "../validations/categoryKnowledge.validation.js";
 
 const getAllCategoryKnowledge = async (req, res) => {
-    let categoryKnowledge = await CategoryKnowledge.find();
+    let categoryKnowledge = await CategoryKnowledge.find().sort({"created_at": -1});
 
     if (!categoryKnowledge.length) {
         return res.status(404).send({ message: "Não há nenhuma Categoria cadastrada." });

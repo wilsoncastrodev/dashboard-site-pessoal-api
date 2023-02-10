@@ -3,7 +3,7 @@ import CategorySkill from "../models/categorySkill.model.js";
 import { categorySkillValidation } from "../validations/categorySkill.validation.js";
 
 const getAllCategorySkill = async (req, res) => {
-    let categorySkill = await CategorySkill.find();
+    let categorySkill = await CategorySkill.find().sort({"created_at": -1});
 
     if (!categorySkill.length) {
         return res.status(404).send({ message: "Não há nenhuma Categoria cadastrada." });

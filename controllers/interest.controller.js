@@ -5,7 +5,7 @@ import { interestValidation } from "../validations/interest.validation.js";
 import { deleteFile } from '../utils/uploads.js';
 
 const getAllInterest = async (req, res) => {
-    let interest = await Interest.find();
+    let interest = await Interest.find().sort({"created_at": -1});
 
     if (!interest.length) {
         return res.status(404).send({ message: "Não há nenhum Interesse cadastrado." });
@@ -15,7 +15,7 @@ const getAllInterest = async (req, res) => {
 };
 
 const getAllProfileInterests = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'interests' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'interests', options: { sort: { 'created_at': -1 } } });
     const interests = profile.interests;
 
     if (!interests.length) {

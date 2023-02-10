@@ -4,7 +4,7 @@ import Profile from "../models/profile.model.js";
 import { educationValidation } from "../validations/education.validation.js";
 
 const getAllEducation = async (req, res) => {
-    let education = await Education.find();
+    let education = await Education.find().sort({"created_at": -1});
 
     if (!education.length) {
         return res.status(404).send({ message: "Não há nenhuma Educação cadastrada." });
@@ -14,7 +14,7 @@ const getAllEducation = async (req, res) => {
 };
 
 const getAllProfileEducation = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'education' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'education', options: { sort: { 'created_at': -1 } } });
     const education = profile.education;
 
     if (!education.length) {

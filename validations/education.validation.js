@@ -23,7 +23,7 @@ export const educationValidation = data => {
             'date.empty': 'O campo Data de Início é obrigatório',
             'date.base': 'O campo Data de Início é inválido',
         }),
-        to: Joi.date().messages({
+        to: Joi.date().allow(null).allow('').messages({
             'date.base': 'O campo Data de Termino é inválido',
         }),
         current: Joi.boolean().messages({

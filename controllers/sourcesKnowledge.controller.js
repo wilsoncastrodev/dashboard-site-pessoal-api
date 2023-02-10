@@ -5,7 +5,7 @@ import { sourcesKnowledgeValidation } from "../validations/sourcesKnowledge.vali
 import { deleteFile } from '../utils/uploads.js';
 
 const getAllSourcesKnowledge = async (req, res) => {
-    let sourcesKnowledge = await SourcesKnowledge.find();
+    let sourcesKnowledge = await SourcesKnowledge.find().sort({"created_at": -1});
 
     if (!sourcesKnowledge.length) {
         return res.status(404).send({ message: "Não há nenhuma Fonte de Conhecimento cadastrada." });
@@ -15,7 +15,7 @@ const getAllSourcesKnowledge = async (req, res) => {
 };
 
 const getAllProfileSourcesKnowledge = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'sourcesKnowledge' });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'sourcesKnowledge', options: { sort: { 'created_at': -1 } } });
     const sourcesKnowledge = profile.sourcesKnowledge;
 
     if (!sourcesKnowledge.length) {
