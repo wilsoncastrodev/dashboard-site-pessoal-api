@@ -14,7 +14,7 @@ const getAllSkill = async (req, res) => {
 };
 
 const getAllProfileSkills = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills', options: { sort: { 'created_at': -1 } } });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills', populate: { path: 'categorySkill' }, options: { sort: { 'created_at': -1 } } });
     const skills = profile.skills;
 
     if (!skills.length) {

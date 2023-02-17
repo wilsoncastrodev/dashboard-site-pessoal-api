@@ -50,3 +50,11 @@ export const deleteFile = (path) => {
         fs.unlinkSync(path);
     }
 }
+
+export const createUrlImage = (req) => {
+    return `${req.protocol}://${req.get('host')}/uploads/images/${req.url.split('/')[1]}/${req.file.filename}`;
+}
+
+export const createUrlFile = (req) => {
+    return `${req.protocol}://${req.get('host')}/uploads/files/${req.url.split('/')[1]}/${req.file.filename}`;
+}

@@ -14,7 +14,7 @@ const getAllKnowledge = async (req, res) => {
 };
 
 const getAllProfileKnowledge = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge', options: { sort: { 'created_at': -1 } } });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' },  options: { sort: { 'created_at': -1 } } });
     const knowledge = profile.knowledge;
 
     if (!knowledge.length) {

@@ -63,6 +63,7 @@ export const updateProfileValidation = data => {
             filename: Joi.any().optional(),
             path: Joi.any().optional(),
             size: Joi.any().optional().custom(sizeFileValidation),
+            url: Joi.any().optional(),
         }).required().messages({
             'any.required': 'O campo Currículo é obrigatório',
             'string.empty': 'O campo Currículo é obrigatório',

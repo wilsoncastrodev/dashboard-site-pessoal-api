@@ -24,6 +24,7 @@ export const interestValidation = data => {
             filename: Joi.any().optional(),
             path: Joi.any().optional(),
             size: Joi.any().optional().custom(sizeImageValidation),
+            url: Joi.any().optional(),
         }).required().messages({
             'any.required': 'O campo Imagem é obrigatório',
             'string.empty': 'O campo Imagem é obrigatório',

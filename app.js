@@ -7,7 +7,7 @@ import express from "express";
 import helmet from "helmet";
 
 const app = express();
-app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 routeConfig(app);
 
 const PORT = process.env.PORT || 5000;

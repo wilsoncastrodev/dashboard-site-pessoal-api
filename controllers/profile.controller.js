@@ -1,6 +1,7 @@
 
 import Profile from "../models/profile.model.js";
 import { updateProfileValidation } from "../validations/profile.validation.js";
+import { deleteFile, createUrlFile } from '../utils/uploads.js';
 
 const getProfileById = async (req, res) => {
     let profile = await Profile.findById(req.params.id)
@@ -21,12 +22,17 @@ const getProfileById = async (req, res) => {
 
 const updateProfile = async (req, res) => {
     req.body.cv = req.file;
+    req.body.cv.url = createUrlFile(req);
 
     const errors = updateProfileValidation(req.body);
 
     if (errors) {
         return res.status(422).send(errors);
     }
+
+    const file = await Profile.findById(req.params.id).select('-_id cv.path');
+
+    deleteFile(file.cv.path);
 
     const profile = await Profile.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
 

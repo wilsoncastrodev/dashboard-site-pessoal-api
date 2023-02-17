@@ -4,7 +4,6 @@ const KnowledgeSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     categoryKnowledge: {
         type: Schema.Types.ObjectId,
