@@ -2,7 +2,7 @@
 import SourcesKnowledge from "../models/sourcesKnowledge.model.js";
 import Profile from "../models/profile.model.js";
 import { sourcesKnowledgeValidation } from "../validations/sourcesKnowledge.validation.js";
-import { deleteFile } from '../utils/uploads.js';
+import { deleteFile, createUrlImage } from '../utils/uploads.js';
 
 const getAllSourcesKnowledge = async (req, res) => {
     let sourcesKnowledge = await SourcesKnowledge.find().sort({"created_at": -1});
@@ -37,6 +37,7 @@ const getSourcesKnowledgeById = async (req, res) => {
 
 const createSourcesKnowledge = async (req, res) => {
     req.body.image = req.file;
+    req.body.image.url = createUrlImage(req);
 
     const errors = sourcesKnowledgeValidation(req.body);
 
@@ -47,7 +48,7 @@ const createSourcesKnowledge = async (req, res) => {
     try {
         const sourcesKnowledge = await SourcesKnowledge.create(req.body);
 
-        await Profile.updateOne({ _id: req.body.profile._id }, { $push: { sourcesKnowledges: sourcesKnowledge._id } })
+        await Profile.updateOne({ _id: req.body.profile._id }, { $push: { sourcesKnowledge: sourcesKnowledge._id } })
 
         return res.status(201).send({
             message: "Fonte de Conhecimento criada com sucesso",
@@ -62,6 +63,7 @@ const createSourcesKnowledge = async (req, res) => {
 
 const updateSourcesKnowledge = async (req, res) => {
     req.body.image = req.file;
+    req.body.image.url = createUrlImage(req);
 
     const errors = sourcesKnowledgeValidation(req.body);
 

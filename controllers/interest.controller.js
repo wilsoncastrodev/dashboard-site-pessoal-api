@@ -2,7 +2,7 @@
 import Interest from "../models/interest.model.js";
 import Profile from "../models/profile.model.js";
 import { interestValidation } from "../validations/interest.validation.js";
-import { deleteFile } from '../utils/uploads.js';
+import { deleteFile, createUrlImage } from '../utils/uploads.js';
 
 const getAllInterest = async (req, res) => {
     let interest = await Interest.find().sort({"created_at": -1});
@@ -37,6 +37,7 @@ const getInterestById = async (req, res) => {
 
 const createInterest = async (req, res) => {
     req.body.image = req.file;
+    req.body.image.url = createUrlImage(req);
 
     const errors = interestValidation(req.body);
 
@@ -62,6 +63,7 @@ const createInterest = async (req, res) => {
 
 const updateInterest = async (req, res) => {
     req.body.image = req.file;
+    req.body.image.url = createUrlImage(req);
 
     const errors = interestValidation(req.body);
 

@@ -20,7 +20,7 @@ router.post("/register", AuthController.register);
 router.delete("/logout", AuthController.logout);
 
 router.get("/profiles/:id", auth, ProfileController.getProfileById);
-router.patch("/profiles/:id", uploadFile('profile', 'name'), auth, ProfileController.updateProfile);
+router.patch("/profiles/:id", uploadFile('profiles', 'name'), auth, ProfileController.updateProfile);
 
 router.get("/educations", auth, EducationController.getAllEducation);
 router.get("/educations/:profileId/profile", auth, EducationController.getAllProfileEducation);

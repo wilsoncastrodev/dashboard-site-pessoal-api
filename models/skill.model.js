@@ -4,7 +4,6 @@ const SkillSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
     },
     level: {
         type: Number,
