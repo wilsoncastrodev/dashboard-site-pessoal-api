@@ -32,7 +32,9 @@ const updateProfile = async (req, res) => {
 
     const file = await Profile.findById(req.params.id).select('-_id cv.path');
 
-    deleteFile(file.cv.path);
+    if (file.cv) {
+        deleteFile(file.cv.path);
+    }
 
     const profile = await Profile.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true });
 

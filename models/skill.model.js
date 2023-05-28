@@ -13,6 +13,10 @@ const SkillSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'CategorySkill'
     },
+    order: {
+        type: Number,
+        required: false,
+    },
 }, {
     timestamps: {
         createdAt: 'created_at',

@@ -60,6 +60,7 @@ router.get("/skills", auth, SkillController.getAllSkill);
 router.get("/skills/:profileId/profile", auth, SkillController.getAllProfileSkills);
 router.get("/skills/:id", auth, SkillController.getSkillById);
 router.post("/skills/", auth, SkillController.createSkill);
+router.post("/skills/sort-skills", auth, SkillController.sortSkills);
 router.patch('/skills/:id', auth, SkillController.updateSkill);
 router.delete('/skills/:id', auth, SkillController.deleteSkill);
 

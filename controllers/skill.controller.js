@@ -2,6 +2,7 @@
 import Skill from "../models/skill.model.js";
 import Profile from "../models/profile.model.js";
 import { skillValidation } from "../validations/skill.validation.js";
+import sortBy from "sort-by";
 
 const getAllSkill = async (req, res) => {
     let skills = await Skill.find().populate('categorySkill').sort({"created_at": -1});
@@ -14,8 +15,9 @@ const getAllSkill = async (req, res) => {
 };
 
 const getAllProfileSkills = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills', populate: { path: 'categorySkill' }, options: { sort: { 'created_at': -1 } } });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'skills', populate: { path: 'categorySkill' }});
     const skills = profile.skills;
+    skills.sort(sortBy('categorySkill.name', 'order'));
 
     if (!skills.length) {
         return res.status(404).send({ message: "Não há nenhuma Habilidade cadastrada." });
@@ -86,11 +88,22 @@ const deleteSkill = async (req, res) => {
     });
 };
 
+const sortSkills = async (req, res) => {
+    req.body.skills.forEach(async (skill) => {
+        await Skill.findByIdAndUpdate({ _id: skill._id }, skill, { new: true });
+    });
+
+    return res.status(200).send({
+        message: "Habilidades ordenadas com sucesso",
+    });
+};
+
 export default {
     getAllSkill,
     getAllProfileSkills,
     getSkillById,
     createSkill,
     updateSkill,
-    deleteSkill
+    deleteSkill,
+    sortSkills
 }
