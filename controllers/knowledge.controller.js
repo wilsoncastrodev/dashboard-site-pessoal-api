@@ -2,6 +2,7 @@
 import Knowledge from "../models/knowledge.model.js";
 import Profile from "../models/profile.model.js";
 import { knowledgeValidation } from "../validations/knowledge.validation.js";
+import sortBy from "sort-by";
 
 const getAllKnowledge = async (req, res) => {
     let knowledge = await Knowledge.find().populate('categoryKnowledge').sort({"created_at": -1});
@@ -16,6 +17,7 @@ const getAllKnowledge = async (req, res) => {
 const getAllProfileKnowledge = async (req, res) => {
     const profile = await Profile.findById(req.params.profileId).populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' },  options: { sort: { 'created_at': -1 } } });
     const knowledge = profile.knowledge;
+    knowledge.sort(sortBy('categoryKnowledge.name', 'order'));
 
     if (!knowledge.length) {
         return res.status(404).send({ message: "Não há nenhum Conhecimento cadastrado." });
@@ -86,11 +88,22 @@ const deleteKnowledge = async (req, res) => {
     });
 };
 
+const sortKnowledge = async (req, res) => {
+    req.body.knowledge.forEach(async (knowledge) => {
+        await Knowledge.findByIdAndUpdate({ _id: knowledge._id }, knowledge, { new: true });
+    });
+
+    return res.status(200).send({
+        message: "Habilidades ordenadas com sucesso",
+    });
+};
+
 export default {
     getAllKnowledge,
     getAllProfileKnowledge,
     getKnowledgeById,
     createKnowledge,
     updateKnowledge,
-    deleteKnowledge
+    deleteKnowledge,
+    sortKnowledge
 }

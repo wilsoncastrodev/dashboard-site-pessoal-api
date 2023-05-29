@@ -9,6 +9,10 @@ const KnowledgeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'CategoryKnowledge'
     },
+    order: {
+        type: Number,
+        required: false,
+    },
 }, {
     timestamps: {
         createdAt: 'created_at',

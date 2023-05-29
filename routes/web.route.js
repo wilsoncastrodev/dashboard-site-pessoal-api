@@ -75,6 +75,7 @@ router.get("/knowledge", auth, KnowledgeController.getAllKnowledge);
 router.get("/knowledge/:profileId/profile", auth, KnowledgeController.getAllProfileKnowledge);
 router.get("/knowledge/:id", auth, KnowledgeController.getKnowledgeById);
 router.post("/knowledge/", auth, KnowledgeController.createKnowledge);
+router.post("/knowledge/sort-knowledge", auth, KnowledgeController.sortKnowledge);
 router.patch('/knowledge/:id', auth, KnowledgeController.updateKnowledge);
 router.delete('/knowledge/:id', auth, KnowledgeController.deleteKnowledge);
 
