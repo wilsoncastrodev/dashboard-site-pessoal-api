@@ -53,6 +53,7 @@ router.delete('/sources-knowledge/:id', auth, SourcesKnowledgeController.deleteS
 router.get("/category-skills", auth, CategorySkillController.getAllCategorySkill);
 router.get("/category-skills/:id", auth, CategorySkillController.getCategorySkillById);
 router.post("/category-skills/", auth, CategorySkillController.createCategorySkill);
+router.post("/category-skills/sort-categories-skill", auth, CategorySkillController.sortCategoriesSkill);
 router.patch('/category-skills/:id', auth, CategorySkillController.updateCategorySkill);
 router.delete('/category-skills/:id', auth, CategorySkillController.deleteCategorySkill);
 

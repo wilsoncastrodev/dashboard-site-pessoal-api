@@ -3,7 +3,7 @@ import CategorySkill from "../models/categorySkill.model.js";
 import { categorySkillValidation } from "../validations/categorySkill.validation.js";
 
 const getAllCategorySkill = async (req, res) => {
-    let categorySkill = await CategorySkill.find().sort({"created_at": -1});
+    let categorySkill = await CategorySkill.find().sort({"order": 1});
 
     if (!categorySkill.length) {
         return res.status(404).send({ message: "Não há nenhuma Categoria cadastrada." });
@@ -72,10 +72,21 @@ const deleteCategorySkill = async (req, res) => {
     });
 };
 
+const sortCategoriesSkill = async (req, res) => {
+    req.body.categoriesSkill.forEach(async (category) => {
+        await CategorySkill.findByIdAndUpdate({ _id: category._id }, category, { new: true });
+    });
+
+    return res.status(200).send({
+        message: "Categorias ordenadas com sucesso",
+    });
+};
+
 export default {
     getAllCategorySkill,
     getCategorySkillById,
     createCategorySkill,
     updateCategorySkill,
-    deleteCategorySkill
+    deleteCategorySkill,
+    sortCategoriesSkill
 }
