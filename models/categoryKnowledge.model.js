@@ -6,6 +6,10 @@ const CategoryKnowledgeSchema = new Schema({
         require: true,
         unique: true
     },
+    order: {
+        type: Number,
+        required: false,
+    },
 }, {
     timestamps: {
         createdAt: 'created_at',

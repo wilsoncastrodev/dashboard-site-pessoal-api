@@ -68,6 +68,7 @@ router.delete('/skills/:id', auth, SkillController.deleteSkill);
 router.get("/category-knowledge", auth, CategoryKnowledgeController.getAllCategoryKnowledge);
 router.get("/category-knowledge/:id", auth, CategoryKnowledgeController.getCategoryKnowledgeById);
 router.post("/category-knowledge/", auth, CategoryKnowledgeController.createCategoryKnowledge);
+router.post("/category-knowledge/sort-categories-knowledge", auth, CategoryKnowledgeController.sortCategoryKnowledge);
 router.patch('/category-knowledge/:id', auth, CategoryKnowledgeController.updateCategoryKnowledge);
 router.delete('/category-knowledge/:id', auth, CategoryKnowledgeController.deleteCategoryKnowledge);
 

@@ -4,7 +4,7 @@ import Profile from "../models/profile.model.js";
 import { experienceValidation } from "../validations/experience.validation.js";
 
 const getAllExperience = async (req, res) => {
-    let experiences = await Experience.find().sort({"created_at": -1});
+    let experiences = await Experience.find().sort({'from': 1});
 
     if (!experiences.length) {
         return res.status(404).send({ message: "Não há nenhuma Experiência cadastrada." });
@@ -14,7 +14,7 @@ const getAllExperience = async (req, res) => {
 };
 
 const getAllProfileExperiences = async (req, res) => {
-    const profile = await Profile.findById(req.params.profileId).populate({ path: 'experiences', options: { sort: { 'created_at': -1 } } });
+    const profile = await Profile.findById(req.params.profileId).populate({ path: 'experiences', options: { sort: { 'from': -1 } } });
     const experiences = profile.experiences;
 
     if (!experiences.length) {

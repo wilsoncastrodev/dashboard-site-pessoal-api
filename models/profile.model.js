@@ -12,6 +12,10 @@ const ProfileSchema = new Schema({
         trim: true,
         minLength: 5
     },
+    age: {
+        type: Number,
+        required: true,
+    },
     profession: {
         type: String,
         trim: true

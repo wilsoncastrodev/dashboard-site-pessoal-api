@@ -9,6 +9,10 @@ const ExperienceSchema = new Schema({
         type: String,
         required: true,
     },
+    location: {
+        type: String,
+        required: true,
+    },
     from: {
         type: Date,
         required: true,

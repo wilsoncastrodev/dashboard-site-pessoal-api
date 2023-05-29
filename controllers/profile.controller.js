@@ -5,12 +5,13 @@ import { deleteFile, createUrlFile } from '../utils/uploads.js';
 
 const getProfileById = async (req, res) => {
     let profile = await Profile.findById(req.params.id)
-        .populate({ path: 'education' })
-        .populate({ path: 'experiences' })
+        .populate({ path: 'user', select: 'email'})
+        .populate({ path: 'education', options: { sort: { 'from': -1 }}})
+        .populate({ path: 'experiences', options: { sort: { 'from': -1 }}})
         .populate({ path: 'interests' })
         .populate({ path: 'sourcesKnowledge' })
-        .populate({ path: 'skills', populate: { path: 'categorySkill' } })
-        .populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' } })
+        .populate({ path: 'skills', populate: { path: 'categorySkill' },  options: { sort: { 'order': 1 }}})
+        .populate({ path: 'knowledge', populate: { path: 'categoryKnowledge' },  options: { sort: { 'order': 1 }}})
         .populate({ path: 'messages'});
 
     if (!profile) {

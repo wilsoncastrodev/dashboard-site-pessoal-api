@@ -3,7 +3,7 @@ import CategoryKnowledge from "../models/categoryKnowledge.model.js";
 import { categoryKnowledgeValidation } from "../validations/categoryKnowledge.validation.js";
 
 const getAllCategoryKnowledge = async (req, res) => {
-    let categoryKnowledge = await CategoryKnowledge.find().sort({"created_at": -1});
+    let categoryKnowledge = await CategoryKnowledge.find().sort({"order": 1});
 
     if (!categoryKnowledge.length) {
         return res.status(404).send({ message: "Não há nenhuma Categoria cadastrada." });
@@ -72,10 +72,21 @@ const deleteCategoryKnowledge = async (req, res) => {
     });
 };
 
+const sortCategoryKnowledge = async (req, res) => {
+    req.body.categoriesKnowledge.forEach(async (category) => {
+        await CategoryKnowledge.findByIdAndUpdate({ _id: category._id }, category, { new: true });
+    });
+
+    return res.status(200).send({
+        message: "Categorias ordenadas com sucesso",
+    });
+};
+
 export default {
     getAllCategoryKnowledge,
     getCategoryKnowledgeById,
     createCategoryKnowledge,
     updateCategoryKnowledge,
-    deleteCategoryKnowledge
+    deleteCategoryKnowledge,
+    sortCategoryKnowledge
 }
